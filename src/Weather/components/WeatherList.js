@@ -1,25 +1,54 @@
 import React from "react";
+import { Modal, Button, ButtonToolbar } from "react-bootstrap";
 
-const WeatherList = ({list, isLoaded}) => {
-    
-  
-     if(isLoaded)   {
-        const {name, main, weather} = list;
-        console.log( list);
-        const icon = weather.map(e => e.icon) ;
+const WeatherList = ({
+  list,
+  isLoaded,
+  modalHiden,
+  modalIsOpen,
+  modalOpen
+}) => {
+  if (isLoaded) {
+    const { name, main, weather } = list;
+    const icon = weather.map(e => e.icon);
 
-        
-        return (<div>
-         <p>{name}</p><img src={`https://openweathermap.org/img/w/${icon[0]}.png`} />
-         <p>{`Temp_now ${(main.temp - 273.15).toFixed(2)}`}</p><br />
-         <p>{`temp_max ${(main.temp_max - 273.15).toFixed(2)}`}</p><br />
-         <p>{`temp_min ${(main.temp_min - 273.15).toFixed(2)}`}</p><br />
-         
-          </div>)
- }
+    return (
+      <div>
+        <ButtonToolbar>
+          <Button bsStyle="primary" onClick={modalOpen}>
+            ShowWeather
+          </Button>
 
-  return null 
+          <Modal  
+            {...this.props}
+            show={modalIsOpen}
+            onHide={modalHiden}
+            dialogClassName="custom-modal"
+          >
+            <Modal.Header>
+              <Modal.Title id="contained-modal-title-lg">
+                Weather Modal
+              </Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              <p>{name}</p>
+              <img src={`https://openweathermap.org/img/w/${icon[0]}.png`} />
+              <p>{`Temp_now ${(main.temp - 273.15).toFixed(2)}`}</p>
+              <p>{`temp_max ${(main.temp_max - 273.15).toFixed(2)}`}</p>
+              <p>{`temp_min ${(main.temp_min - 273.15).toFixed(2)}`}</p>
+              <Modal.Footer>
+                <Button onClick={modalHiden} bsStyle="primary">
+                  Close
+                </Button>
+              </Modal.Footer>
+            </Modal.Body>
+          </Modal>
+        </ButtonToolbar>
+      </div>
+    );
+  }
 
+  return null;
 };
 
 export default WeatherList;

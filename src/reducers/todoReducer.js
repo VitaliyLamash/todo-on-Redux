@@ -8,7 +8,6 @@ const initialState = {
 export const todoReducer = (state = initialState, action) => {
   switch (action.type) {
     case appTypes.ADD_TODO:
-      console.log("action in reduser", action);
       return {
         ...state,
         todos: [
@@ -20,14 +19,12 @@ export const todoReducer = (state = initialState, action) => {
         ]
       };
     case appTypes.DELETE_TODO:
-      console.log("action in reduser", action);
       return {
         ...state,
         todos: state.todos.filter(todo => todo.id !== action.payload)
       };
 
     case appTypes.CHECK_TODO:
-      console.log("action in reduser checktodo", action);
       return {
         ...state,
         todos: state.todos.map(list => {

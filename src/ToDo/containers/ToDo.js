@@ -62,7 +62,6 @@ class ToDo extends Component {
 }
 
 const mapStateToProps = state => {
-  console.log("our state", state);
   return {
     todos: state.todoReducer.todos,
     typeShow: state.todoReducer.show

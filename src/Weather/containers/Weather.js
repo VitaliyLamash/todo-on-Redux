@@ -3,9 +3,16 @@ import WeatherList from "../components/WeatherList";
 import { connect } from "react-redux";
 import { fetchingData } from "../../actions/actionWeather";
 class Weather extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      modalIsOpen: false
+    };
+  }
 
-
-  componentDidMount(){
+  modalHiden = () => this.setState({ modalIsOpen: false });
+  modalOpen = () => this.setState({ modalIsOpen: true });
+  componentDidMount() {
     const param = {
       method: "GET",
       headers: "Access-Control-Allow-Origin",
@@ -18,18 +25,23 @@ class Weather extends Component {
     );
   }
   render() {
-
-    
-    return ( <div>
-    
-    { this.props.isLoading ?  <p>LOADING </p> : 
-      <WeatherList
-        list={this.props.list}
-        isLoading={this.props.isLoading}
-        isLoaded={this.props.isLoaded}
-      />}
-       </div>)
-}
+    return (
+      <div>
+        {this.props.isLoading ? (
+          <p>LOADING </p>
+        ) : (
+          <WeatherList
+            modalOpen={this.modalOpen}
+            modalHiden={this.modalHiden}
+            modalIsOpen={this.state.modalIsOpen}
+            list={this.props.list}
+            isLoading={this.props.isLoading}
+            isLoaded={this.props.isLoaded}
+          />
+        )}
+      </div>
+    );
+  }
 }
 
 const mapStateToProps = state => {
