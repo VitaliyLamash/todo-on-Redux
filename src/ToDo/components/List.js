@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import { ThemeContext } from "../../theme-context";
 
 export const List = ({ todos, handleChecked, handleDelete, typeShow }) => {
   const listTodo = todos.map(todo => {
@@ -25,31 +24,31 @@ export const List = ({ todos, handleChecked, handleDelete, typeShow }) => {
 
   return (
     <ListTodo todos={todos}>
+
       {listTodo}
-      <ButtonHallo>HALLO</ButtonHallo>
-      <ThemeContext.Consumer>
-        {theme => (
-          <button style={{ backgroundColor: theme.background }}>
-            something
-          </button>
-        )}
-      </ThemeContext.Consumer>
+
     </ListTodo>
   );
 };
 
 const ListTodo = styled.ul`
-  border: ${props => (props.todos.length > 0 ? "3px solid red" : "0px")};
-  padding: 10px;
+  // border: ${props => (props.todos.length > 0 ? "3px solid red" : "0px")};
+  max-width: 1100px;
+  display:flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+
   & li {
-    background-color: #fffecc;
-    font-size: 16px;
-    border-radius: 15px;
-    font-size: 20px;
-    text-align: center;
-    margin-bottom: 5px;
+    align-items: flex-end;
+    box-shadow: 5px 10px 10px rgba(0,0,0,0.15);
+    border: 1px solid rgba(0,0,0,0.15);
+    margin: 10px;
+    width: 200px;
+    height: 200px;
+    background-color: #fff2bf;
+    font-size: 14px;
+    margin: 15px;
+    transform: rotate(-27deg);
+    word-wrap: break-word;
   }
-`;
-const ButtonHallo = styled.button`
-  background-color: red;
 `;
