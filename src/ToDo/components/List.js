@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
+import background from '../../pictures/background.png';
 
 export const List = ({ todos, handleChecked, handleDelete, typeShow }) => {
-	console.log(todos);
 	const listTodo = todos.map(todo => {
 		if (typeShow === "all") {
 			return (
@@ -20,12 +20,9 @@ export const List = ({ todos, handleChecked, handleDelete, typeShow }) => {
 			);
 		}
 	});
-
 	return (
-		<ListTodo todos={todos} >
-
+		<ListTodo todos={todos} back={background}>
 			{listTodo}
-
 		</ListTodo>
 	);
 };
@@ -35,12 +32,12 @@ const ListTodo = styled.ul`
   display:flex;
   flex-wrap: wrap;
   flex-direction: row;
+  background-image: url( ${props => (props.back)} );
+  justify-content: center;
 `;
-
-
 const Item = styled.li` 
-position: relative;
- 	cursor: pointer;
+	position: relative;
+	cursor: pointer;
 	background-color: ${props => (props.checked ? '#FFD89E' : '#fff2bf')};
 	margin: ${props => (props.checked ? '15px' : '10px')};
 	width: ${props => (props.checked ? `230px` : '200px')};
@@ -56,13 +53,12 @@ position: relative;
 	padding: 25px 10px 10px 10px;
 `;
 const DeleteButton = styled.button`
-
-position: absolute;
-top: 0%;
-right: 0%;
-z-index: 999;
-background-color: inherit;
-border-radius: 50px;
-font-weight: 800;
+	position: absolute;
+	top: 0%;
+	right: 0%;
+	z-index: 999;
+	background-color: inherit;
+	border-radius: 50px;
+	font-weight: 800;
 
 `
