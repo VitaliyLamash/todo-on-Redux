@@ -1,22 +1,33 @@
 import React from "react";
 import styled from 'styled-components';
 
-export const StateButtons = (props) => {
+export const StateButtons = ({hanleShow, typeShow}) => {
+  console.log(typeShow)
   return (
     <Buttons>
-      <button onClick={() => props.hanleShow('all')}>Show All</button>
-      <button onClick={() => props.hanleShow('checked')}>Show Checked</button>
+      <Button typeShow={typeShow} onClick={() => hanleShow('all')}>Show All</Button>
+      <Button typeShow={typeShow} onClick={() => hanleShow('checked')}>Show Checked</Button>
     </Buttons>
   );
 };
 
-
-
 const Buttons = styled.div`
-
-
-& button{
-
-}
-
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
 `
+
+const Button = styled.button`
+  margin-top: 5px;
+  background-color: #fffdbf;
+  font-size: 25px;
+  border-radius: 10px;
+  transition: 0.5s;
+  &:first-child{
+    background-color: ${props => (props.typeShow === 'all' ? '#FFD89E' : '#fff2bf')};
+  }
+  &:last-child{
+    background-color: ${props => (props.typeShow === 'checked' ? '#FFD89E' : '#fff2bf')};
+  }
+  
+`;

@@ -49,7 +49,7 @@ class ToDo extends Component {
           handleSubmit: this.handleSubmit,
           value: this.state.value
         })}
-        {StateButtons({ hanleShow: this.hanleShow })}
+        {StateButtons({ hanleShow: this.hanleShow, typeShow: this.props.typeShow, })}
         {List({
           todos: this.props.todos,
           typeShow: this.props.typeShow,
@@ -64,7 +64,7 @@ class ToDo extends Component {
 const mapStateToProps = state => {
   return {
     todos: state.todoReducer.todos,
-    typeShow: state.todoReducer.show
+    typeShow: state.todoReducer.show,
   };
 };
 

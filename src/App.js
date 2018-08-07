@@ -18,8 +18,7 @@ export default class App extends Component {
 		return (
 			<div className="container">
 				<List>
-				<Point>LOGO</Point>
-	
+					<Point>LOGO</Point>
 					<Point>
 						<Link to="/">MainPage</Link>
 					</Point>
