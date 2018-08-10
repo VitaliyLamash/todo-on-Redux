@@ -5,12 +5,12 @@ import background from '../../pictures/background.png';
 export const List = ({ todos, handleChecked, handleDelete, typeShow }) => {
 	const listTodo = todos.map(todo => {
 		if (typeShow === "all") {
-			return (
+		return (
 				<Item key={todo.id} onClick={() => handleChecked(todo.id)} checked={todo.checked}>
 					{todo.todo}
 					<DeleteButton onClick={() => handleDelete(todo.id)}>X</DeleteButton>
 				</Item>
-			);
+		);
 		} else if (todo.checked === true) {
 			return (
 				<Item key={todo.id} onClick={() => handleChecked(todo.id)} checked={todo.checked}>

@@ -1,65 +1,55 @@
 import React, { Component } from "react";
 import WeatherList from "../components/WeatherList";
+import ChooseWeather from '../components/ChooseWeather';
 import { connect } from "react-redux";
-import { fetchingData } from "../../actions/actionWeather";
+import { fetchingData, getIdTown, isLoaded } from "../../actions/actionWeather";
 class Weather extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      modalIsOpen: false
-    };
-  }
+	constructor(props) {
+		super(props);
+		this.state = {
+			ID: '',
+		};
+	}
 
-  modalHiden = () => this.setState({ modalIsOpen: false });
-  modalOpen = () => this.setState({ modalIsOpen: true });
-  componentDidMount() {
-    const param = {
-      method: "GET",
-      headers: "Access-Control-Allow-Origin",
-      mode: "no-cors"
-    };
+	modalHiden = () => this.props.isLoadedFn(false);
 
-    this.props.fetchingData(
-      "https://api.openweathermap.org/data/2.5/weather?q=London,uk&appid=51d78cf816bd1c2c2be853cb3858da92",
-      param
-    );
-  }
-  render() {
-    return (
-      <div>
-        {this.props.isLoading ? (
-          <p>LOADING </p>
-        ) : (
-          <WeatherList
-            modalOpen={this.modalOpen}
-            modalHiden={this.modalHiden}
-            modalIsOpen={this.state.modalIsOpen}
-            list={this.props.list}
-            isLoading={this.props.isLoading}
-            isLoaded={this.props.isLoaded}
-          />
-        )}
-      </div>
-    );
-  }
+
+	chooseWeather = event => {
+		this.setState({ ID: event.target.value })
+		setTimeout(() => this.props.getIdTown(this.state.ID), 0)
+		setTimeout(() => this.props.fetchingData(`https://api.openweathermap.org/data/2.5/weather?id=${this.props.idTown}&appid=51d78cf816bd1c2c2be853cb3858da92`), 0)
+
+	};
+
+	render() {
+		return (
+			<div>
+				<ChooseWeather chooseWeather={this.chooseWeather} ID={this.state.ID} />
+				<WeatherList
+					modalHiden={this.modalHiden}
+					list={this.props.list}
+					isLoaded={this.props.isLoaded}
+				/>
+			</div>
+		);
+	}
 }
 
 const mapStateToProps = state => {
-  return {
-    isLoading: state.itemsIsLoading.itemsIsLoading,
-    list: state.weatherReducer,
-    isLoaded: state.itemsIsLoaded.itemsIsLoaded
-  };
+	return {
+		list: state.weatherReducer,
+		isLoaded: state.weatherReducer.isLoaded,
+		idTown: state.weatherReducer.idTown
+	};
 };
 const mapDispatchToProps = dispatch => {
-  return {
-    fetchingData: list => {
-      dispatch(fetchingData(list));
-    }
-  };
+	return {
+		fetchingData: list => dispatch(fetchingData(list)),
+		getIdTown: id => dispatch(getIdTown(id)),
+		isLoadedFn: bool => dispatch(isLoaded(bool))
+	};
 };
-
 export default connect(
-  mapStateToProps,
-  mapDispatchToProps
+	mapStateToProps,
+	mapDispatchToProps
 )(Weather);

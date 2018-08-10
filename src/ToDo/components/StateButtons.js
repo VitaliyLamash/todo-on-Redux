@@ -2,7 +2,6 @@ import React from "react";
 import styled from 'styled-components';
 
 export const StateButtons = ({hanleShow, typeShow}) => {
-  console.log(typeShow)
   return (
     <Buttons>
       <Button typeShow={typeShow} onClick={() => hanleShow('all')}>Show All</Button>

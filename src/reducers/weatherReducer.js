@@ -1,42 +1,28 @@
 import * as appTypes from "../types/appTypes";
 
-const initialState = {};
+const initialState = {isLoaded: false};
 
 export const weatherReducer = (state = initialState, action) => {
   switch (action.type) {
     case appTypes.ADD_WEATHER_LIST:
       return {
+        ...state,
         ...action.payload
       };
-
-    default:
-      return state;
-  }
-};
-
-export const itemsIsLoading = (state = initialState, action) => {
-  switch (action.type) {
-    case appTypes.ITEMS_IS_LOADING:
-      return {
-        ...state,
-        itemsIsLoading: action.payload
-      };
-    default:
-      return state;
-  }
-};
-
-export const itemsIsLoaded = (state = initialState, action) => {
-  switch (action.type) {
     case appTypes.ITEMS_IS_LOADED:
-    console.log('itemsIsLoaded reducer', action.payload)
       return {
         ...state,
-        itemsIsLoaded: action.payload
+        isLoaded: action.payload
       };
+    case appTypes.GET_ID_TOWN:
+      return {
+        ...state,
+        idTown: action.payload
+      }
     default:
       return state;
   }
 };
+
 
 // reselect
