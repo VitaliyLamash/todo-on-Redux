@@ -11,17 +11,21 @@ class Weather extends Component {
 		};
 	}
 
-	modalHiden = () => this.props.isLoadedFn(false);
+	modalHiden = () => {
+		this.props.isLoadedFn(false);
+	}
 
 
 	chooseWeather = event => {
-		this.setState({ ID: event.target.value })
-		setTimeout(() => this.props.getIdTown(this.state.ID), 0)
-		setTimeout(() => this.props.fetchingData(`https://api.openweathermap.org/data/2.5/weather?id=${this.props.idTown}&appid=51d78cf816bd1c2c2be853cb3858da92`), 0)
-
+		let { value } = event.target;
+		return new Promise((resolve) => resolve())
+			.then(() => this.setState({ ID: value }))
+			.then(() => this.props.getIdTown(this.state.ID))
+			.then(() => this.props.fetchingData(`https://api.openweathermap.org/data/2.5/weather?id=${this.props.idTown}&appid=51d78cf816bd1c2c2be853cb3858da92`));
 	};
 
 	render() {
+		console.log(this.state);
 		return (
 			<div>
 				<ChooseWeather chooseWeather={this.chooseWeather} ID={this.state.ID} />
