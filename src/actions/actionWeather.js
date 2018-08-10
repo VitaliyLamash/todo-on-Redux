@@ -26,13 +26,11 @@ export function fetchingData(url) {
 	return function (dispatch, getState) {
 		let { weatherReducer } = getState();
 		if (weatherReducer.id == weatherReducer.idTown) {
-			console.log('from if in action')
 			return;
 
 		}
 		getRequest(url)
 			.then(r => {
-				console.log('try it')
 				dispatch(addList(r));
 			})
 			.then(r => {
@@ -40,7 +38,6 @@ export function fetchingData(url) {
 				dispatch(isLoaded(true));
 			})
 			.catch(erorr => {
-				console.log("reject", erorr)
 				dispatch(isLoaded(false));
 			});
 	};

@@ -10,6 +10,7 @@ const WeatherList = ({
 	if (isLoaded) {
 		const { name, main, weather } = list;
 		const icon = weather.map(e => e.icon);
+		const date = String(new Date());
 		return (
 			<div>
 				<ButtonToolbar>
@@ -28,6 +29,7 @@ const WeatherList = ({
 						<Modal.Body>
 						<Body>
 							<Title>{name}</Title>
+							<DateToDay>{date.substring(0,15)}</DateToDay>
 							<Image src={`https://openweathermap.org/img/w/${icon[0]}.png`} />
 							<TempNow>{`${(main.temp - 273.15).toFixed(0)}`}</TempNow>
 							<OtherTemp>{`max: ${(main.temp_max - 273.15).toFixed(1)}  min: ${(main.temp_min - 273.15).toFixed(1)}`}</OtherTemp>
@@ -55,6 +57,10 @@ flex-direction: column;
 align-items: center;
 `;
 
+const DateToDay = styled.div`
+font-weight: 700;
+margin-bottom: 5px;
+`;
 const TempNow = styled.div`
 font-size: 90px;
 font-weight: 600;
@@ -63,12 +69,12 @@ margin-bottom: 10px;
 
 const OtherTemp = styled.div`
 font-size: 25px;
-font-weght: 600;
+font-weight: 700;
 margin-bottom: 15px;
 `;
 const Title = styled.div`
 display: flex;
-font-size: 25px;
+font-size: 35px;
 font-weight: 700;
 margin-bottom: 10px;
 
