@@ -1,4 +1,5 @@
 import React from "react";
+import styled from "styled-components";
 import { Modal, Button, ButtonToolbar } from "react-bootstrap";
 
 const WeatherList = ({
@@ -13,22 +14,24 @@ const WeatherList = ({
 			<div>
 				<ButtonToolbar>
 					<Modal
-						{...this.props}
 						show={isLoaded}
 						onHide={modalHiden}
 						dialogClassName="custom-modal"
+						bsSize="small"
+						
 					>
 						<Modal.Header>
 							<Modal.Title id="contained-modal-title-lg">
-								Weather Modal
-			  </Modal.Title>
+								DAY FORECAST
+			  				</Modal.Title>
 						</Modal.Header>
 						<Modal.Body>
-							<p>{name}</p>
-							<img src={`https://openweathermap.org/img/w/${icon[0]}.png`} />
-							<p>{`Temp_now ${(main.temp - 273.15).toFixed(2)}`}</p>
-							<p>{`temp_max ${(main.temp_max - 273.15).toFixed(2)}`}</p>
-							<p>{`temp_min ${(main.temp_min - 273.15).toFixed(2)}`}</p>
+						<Body>
+							<Title>{name}</Title>
+							<Image src={`https://openweathermap.org/img/w/${icon[0]}.png`} />
+							<TempNow>{`${(main.temp - 273.15).toFixed(0)}`}</TempNow>
+							<OtherTemp>{`max: ${(main.temp_max - 273.15).toFixed(1)}  min: ${(main.temp_min - 273.15).toFixed(1)}`}</OtherTemp>
+							</Body>
 							<Modal.Footer>
 								<Button onClick={modalHiden} bsStyle="primary">
 									Close
@@ -45,3 +48,34 @@ const WeatherList = ({
 };
 
 export default WeatherList;
+
+const Body = styled.div`
+display: flex;
+flex-direction: column;
+align-items: center;
+`;
+
+const TempNow = styled.div`
+font-size: 90px;
+font-weight: 600;
+margin-bottom: 10px;
+`;
+
+const OtherTemp = styled.div`
+font-size: 25px;
+font-weght: 600;
+margin-bottom: 15px;
+`;
+const Title = styled.div`
+display: flex;
+font-size: 25px;
+font-weight: 700;
+margin-bottom: 10px;
+
+`;
+
+
+const Image = styled.img`
+height: 150px;
+width: 150px;
+`;
