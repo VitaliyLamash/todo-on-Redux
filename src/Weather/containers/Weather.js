@@ -3,36 +3,36 @@ import WeatherList from "../components/WeatherList";
 import ChooseWeather from '../components/ChooseWeather';
 import { connect } from "react-redux";
 import { fetchingData, getIdTown, isLoaded } from "../../actions/actionWeather";
+
+
 class Weather extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			ID: '',
-		};
+			typeTemp: true
+		}
 	}
-
-	modalHiden = () => {
-		this.props.isLoadedFn(false);
-	}
-
+	modalHiden = () => this.props.isLoadedFn(false);
 
 	chooseWeather = event => {
 		let { value } = event.target;
-		return new Promise((resolve) => resolve())
-			.then(() => this.setState({ ID: value }))
-			.then(() => this.props.getIdTown(this.state.ID))
-			.then(() => this.props.fetchingData(`https://api.openweathermap.org/data/2.5/weather?id=${this.props.idTown}&appid=51d78cf816bd1c2c2be853cb3858da92`));
+		this.props.getIdTown(value);
+		console.log('befor')
+		this.props.fetchingData(`https://api.openweathermap.org/data/2.5/weather?id=${value}&appid=51d78cf816bd1c2c2be853cb3858da92`);
 	};
 
+	changeTemp = () => this.setState({ typeTemp: !this.state.typeTemp});
+
 	render() {
-		console.log(this.state);
 		return (
 			<div>
-				<ChooseWeather chooseWeather={this.chooseWeather} ID={this.state.ID} />
+				<ChooseWeather chooseWeather={this.chooseWeather} />
 				<WeatherList
+					changeTemp={this.changeTemp}
 					modalHiden={this.modalHiden}
 					list={this.props.list}
 					isLoaded={this.props.isLoaded}
+					typeTemp={this.state.typeTemp}
 				/>
 			</div>
 		);

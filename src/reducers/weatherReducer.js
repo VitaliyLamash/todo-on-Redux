@@ -1,6 +1,9 @@
 import * as appTypes from "../types/appTypes";
 
-const initialState = {isLoaded: false};
+const initialState = {
+  isLoaded: false,
+  idTown: ''
+};
 
 export const weatherReducer = (state = initialState, action) => {
   switch (action.type) {

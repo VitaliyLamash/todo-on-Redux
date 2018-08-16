@@ -1,11 +1,10 @@
 import React from 'react';
 
-const ChooseWeather = ({ chooseWeather, ID }) => {
+const ChooseWeather = ({ chooseWeather, changeTemp }) => {
     return (
-        <select onChange={(event) => chooseWeather(event)} defaultValue={ID}>
-
-            <option value={ID} >Choose the right town</option>
-            <option value="524901">Moscow</option> 
+        <select onChange={(event) => chooseWeather(event)} >
+            <option value="" >Choose the right town</option>
+            <option value="524901">Moscow</option>
             <option value="703448">Kyiv</option>
             <option value="2643743">London</option>
             <option value="5128581">New - Youk</option>

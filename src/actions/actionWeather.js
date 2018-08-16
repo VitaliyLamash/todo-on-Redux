@@ -23,12 +23,7 @@ export const getIdTown = id => {
 }
 
 export function fetchingData(url) {
-	return function (dispatch, getState) {
-		let { weatherReducer } = getState();
-		if (weatherReducer.id == weatherReducer.idTown) {
-			return;
-
-		}
+	return function (dispatch) {
 		getRequest(url)
 			.then(r => {
 				dispatch(addList(r));
