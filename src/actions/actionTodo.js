@@ -27,3 +27,10 @@ export const showTodo = text => {
     payload: text
   };
 };
+
+export const changeTodo = (payload) => {
+  return {
+    type: appTypes.CHANGE_TODO,
+    payload
+  }
+}

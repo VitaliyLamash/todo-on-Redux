@@ -1,24 +1,22 @@
 import React from "react";
-import styled from 'styled-components';
+import styled from "styled-components";
 
-
-export const InputForm = props => {
+export const InputForm = ({ handleSubmit, handleChange, value }) => {
   return (
-    <Form onSubmit={props.handleSubmit}>
-      <Input type="text" value={props.value} onChange={props.handleChange} />
+    <Form onSubmit={handleSubmit}>
+      <Input type="text" value={value} onChange={handleChange} />
       <Button>Save</Button>
     </Form>
   );
 };
-
 
 const Form = styled.form`
   display: flex;
   justify-content: center;
 `;
 const Input = styled.input`
-  width: 850px;
-  height: 50px;
+  width: 450px;
+  height: 30px;
   margin: 0 auto;
   text-align: center;
   border-radius: 15px;
@@ -33,6 +31,6 @@ const Button = styled.button`
   background-color: #fffdbf;
   font-size: 25px;
   border-radius: 15px;
-  height: 50px;
-  width: 150px;
+  height: 30px;
+  width: 100px;
 `;

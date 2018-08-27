@@ -37,6 +37,16 @@ export const todoReducer = (state = initialState, action) => {
     case appTypes.SHOW_TODO:
       return { ...state, show: action.payload };
 
+    case appTypes.CHANGE_TODO:
+      return {
+        ...state,
+        todos: state.todos.map(list => {
+          if (list.id === action.payload.id) {
+            list.todo = action.payload.text;
+          }
+          return list;
+        })
+      };
     default:
       return state;
   }
